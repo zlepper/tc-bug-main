@@ -2,6 +2,7 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -11,6 +12,10 @@ accordingly, and delete the patch script.
 */
 changeBuildType(RelativeId("Build1")) {
     triggers {
+        remove {
+            vcs {
+            }
+        }
         add {
             finishBuildTrigger {
                 buildType = "TcBugMain_Build"
