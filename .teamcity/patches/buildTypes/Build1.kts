@@ -26,4 +26,12 @@ changeBuildType(RelativeId("Build1")) {
             }
         }
     }
+
+    dependencies {
+        add(RelativeId("Build")) {
+            snapshot {
+            }
+        }
+
+    }
 }
