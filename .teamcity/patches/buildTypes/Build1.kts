@@ -30,6 +30,7 @@ changeBuildType(RelativeId("Build1")) {
     dependencies {
         add(RelativeId("Build")) {
             snapshot {
+                onDependencyFailure = FailureAction.FAIL_TO_START
             }
         }
 
