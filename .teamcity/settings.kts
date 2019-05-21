@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
 
@@ -70,7 +71,7 @@ object BuildSupport : BuildType({
 
     triggers {
         finishBuildTrigger {
-                buildType = Build.Id.toString()
+                buildType = Build.id.toString()
                 branchFilter = """
                     +:refs/heads/task/**
                     +:refs/heads/master
@@ -79,10 +80,8 @@ object BuildSupport : BuildType({
     }
 
     dependencies {
-        add(RelativeId("Build")) {
-            snapshot {
-                onDependencyFailure = FailureAction.FAIL_TO_START
-            }
+        snapshot(Build) {
+            onDependencyFailure = FailureAction.FAIL_TO_START
         }
     }
 })
