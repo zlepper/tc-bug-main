@@ -81,6 +81,7 @@ object BuildSupport : BuildType({
     dependencies {
         add(RelativeId("Build")) {
             snapshot {
+                onDependencyFailure = FailureAction.FAIL_TO_START
             }
         }
     }
