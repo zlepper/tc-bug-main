@@ -73,7 +73,7 @@ object BuildSupport : BuildType({
         finishBuildTrigger {
                 buildType = Build.id.toString()
                 branchFilter = """
-                    +:refs/heads/task/**
+                    +:refs/heads/task/*
                     +:refs/heads/master
                 """.trimIndent()
             }
