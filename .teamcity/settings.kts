@@ -52,6 +52,10 @@ object Build : BuildType({
 
     triggers {
         vcs {
+            branchFilter = """
+                +:refs/heads/*
+                +:refs/heads/master
+            """.trimIndent()
         }
     }
 })
@@ -73,7 +77,7 @@ object BuildSupport : BuildType({
         finishBuildTrigger {
                 buildType = Build.id.toString()
                 branchFilter = """
-                    +:refs/heads/task/*
+                    +:refs/heads/*
                     +:refs/heads/master
                 """.trimIndent()
             }
