@@ -29,9 +29,9 @@ version = "2018.2"
 
 project {
 
-    vcsRoot(HttpsGithubComZlepperTcBugSecondaryRefsHeadsMaster)
+    vcsRoot(SupportRoot)
 
-    buildType(Build1)
+    buildType(BuildSupport)
     buildType(Build)
 }
 
@@ -45,7 +45,7 @@ object Build : BuildType({
     steps {
         script {
             name = "Build main"
-            scriptContent = """Echo "Build""""
+            scriptContent = """echo "Build""""
         }
     }
 
@@ -55,11 +55,11 @@ object Build : BuildType({
     }
 })
 
-object Build1 : BuildType({
+object BuildSupport : BuildType({
     name = "Build support"
 
     vcs {
-        root(HttpsGithubComZlepperTcBugSecondaryRefsHeadsMaster)
+        root(SupportRoot)
     }
 
     steps {
@@ -69,12 +69,24 @@ object Build1 : BuildType({
     }
 
     triggers {
-        vcs {
+        finishBuildTrigger {
+                buildType = Build.Id.toString()
+                branchFilter = """
+                    +:refs/heads/task/**
+                    +:refs/heads/master
+                """.trimIndent()
+            }
+    }
+
+    dependencies {
+        add(RelativeId("Build")) {
+            snapshot {
+            }
         }
     }
 })
 
-object HttpsGithubComZlepperTcBugSecondaryRefsHeadsMaster : GitVcsRoot({
+object SupportRoot : GitVcsRoot({
     name = "https://github.com/zlepper/tc-bug-secondary#refs/heads/master"
     url = "https://github.com/zlepper/tc-bug-secondary"
 })
