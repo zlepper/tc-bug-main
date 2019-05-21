@@ -87,6 +87,6 @@ object BuildSupport : BuildType({
 })
 
 object SupportRoot : GitVcsRoot({
-    name = "https://github.com/zlepper/tc-bug-secondary#refs/heads/master"
-    url = "https://github.com/zlepper/tc-bug-secondary"
+    name = "https://github.com/zlepper/tc-bug-trietary#refs/heads/master"
+    url = "https://github.com/zlepper/tc-bug-trietary.git"
 })
